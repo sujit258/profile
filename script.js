@@ -37,13 +37,13 @@ document.querySelectorAll('[data-words]').forEach((element) => {
 const projects = document.getElementById('projects');
 const track = document.getElementById('project-track');
 const progress = document.getElementById('project-progress');
-const desktopProjects = window.matchMedia('(min-width: 721px) and (prefers-reduced-motion: no-preference)');
+const scrollProjects = window.matchMedia('(prefers-reduced-motion: no-preference)');
 let projectTarget = 0;
 let projectCurrent = 0;
 let projectFrame;
 
 function updateProjectTrack() {
-  if (!desktopProjects.matches || !projects || !track || !progress) return;
+  if (!scrollProjects.matches || !projects || !track || !progress) return;
 
   const bounds = projects.getBoundingClientRect();
   const scrollDistance = projects.offsetHeight - window.innerHeight;
@@ -92,6 +92,6 @@ function updateWordReveal() {
 
 window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('resize', updateProjectTrack);
-desktopProjects.addEventListener('change', updateProjectTrack);
+scrollProjects.addEventListener('change', updateProjectTrack);
 updateProjectTrack();
 updateWordReveal();

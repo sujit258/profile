@@ -8,33 +8,47 @@
 }
 
 @media (max-width: 720px) {
-  .projects-viewport {
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 0 18px 18px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+  .site-header nav a:nth-child(-n + 2) { display: block; }
+
+  .projects {
+    height: 260vh;
+    padding: 0;
   }
 
-  .projects-viewport::-webkit-scrollbar { display: none; }
+  .projects-sticky {
+    position: sticky;
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+  }
+
+  .projects-viewport {
+    overflow: hidden;
+    padding: 0 0 0 18px;
+  }
 
   .project-grid {
     display: flex;
-    gap: 10px;
+    gap: 1px;
     width: max-content;
     padding: 0 18px 0 0;
   }
 
   .project-card {
-    width: min(84vw, 390px);
+    width: 82vw;
     min-height: 420px;
     flex: none;
-    scroll-snap-align: start;
+  }
+
+  .projects-progress {
+    display: block;
+    margin: 22px 18px 0;
   }
 }
 
 @media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+  .projects { height: auto; padding: 82px 0; }
+  .projects-sticky { position: static; height: auto; display: block; }
   .projects-viewport { overflow: visible; padding: 0 18px; }
   .project-grid { display: grid; width: auto; padding: 0; }
   .project-card { width: auto; min-height: 370px; }
