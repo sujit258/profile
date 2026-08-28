@@ -6,3 +6,36 @@
 @media (prefers-reduced-motion: reduce) {
   .intro-copy > p[data-words] span { color: var(--paper) !important; }
 }
+
+@media (max-width: 720px) {
+  .projects-viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 18px 18px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .projects-viewport::-webkit-scrollbar { display: none; }
+
+  .project-grid {
+    display: flex;
+    gap: 10px;
+    width: max-content;
+    padding: 0 18px 0 0;
+  }
+
+  .project-card {
+    width: min(84vw, 390px);
+    min-height: 420px;
+    flex: none;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+  .projects-viewport { overflow: visible; padding: 0 18px; }
+  .project-grid { display: grid; width: auto; padding: 0; }
+  .project-card { width: auto; min-height: 370px; }
+}

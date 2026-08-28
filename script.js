@@ -8,7 +8,20 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
-document.getElementById('year').textContent = new Date().getFullYear();
+
+const clock = document.getElementById('clock');
+function updateClock() {
+  if (!clock) return;
+  clock.textContent = `${new Date().toLocaleTimeString('en-GB', {
+    timeZone: 'Asia/Kolkata',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  })} IST`;
+}
+
+updateClock();
+setInterval(updateClock, 1000);
 
 document.querySelectorAll('[data-words]').forEach((element) => {
   const words = element.textContent.trim().split(/\s+/);
