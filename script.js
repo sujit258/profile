@@ -10,6 +10,17 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
 document.getElementById('year').textContent = new Date().getFullYear();
 
+document.querySelectorAll('[data-words]').forEach((element) => {
+  const words = element.textContent.trim().split(/\s+/);
+  element.textContent = '';
+
+  words.forEach((word, index) => {
+    const span = document.createElement('span');
+    span.textContent = `${word}${index === words.length - 1 ? '' : ' '}`;
+    element.appendChild(span);
+  });
+});
+
 const projects = document.getElementById('projects');
 const track = document.getElementById('project-track');
 const progress = document.getElementById('project-progress');
@@ -51,6 +62,18 @@ function onScroll() {
   scrollFrame = requestAnimationFrame(() => {
     scrollFrame = undefined;
     updateProjectTrack();
+    updateWordReveal();
+  });
+}
+
+function updateWordReveal() {
+  document.querySelectorAll('[data-words]').forEach((element) => {
+    const bounds = element.getBoundingClientRect();
+    const amount = Math.min(1, Math.max(0, (window.innerHeight * 0.82 - bounds.top) / (bounds.height + window.innerHeight * 0.28)));
+
+    [...element.children].forEach((word, index) => {
+      word.style.color = index / element.children.length < amount ? 'var(--paper)' : 'rgba(236, 232, 223, .16)';
+    });
   });
 }
 
@@ -58,3 +81,4 @@ window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('resize', updateProjectTrack);
 desktopProjects.addEventListener('change', updateProjectTrack);
 updateProjectTrack();
+updateWordReveal();

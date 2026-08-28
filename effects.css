@@ -1,0 +1,8 @@
+.intro-copy > p[data-words] span {
+  color: rgba(236, 232, 223, .16);
+  transition: color .45s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-copy > p[data-words] span { color: var(--paper) !important; }
+}
